@@ -1,0 +1,41 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>RACS</mat-toolbar>
+    <mat-nav-list>
+      <a *ngFor="let navItem of navMenuItems | keyvalue" mat-list-item href="{{navItem.value.path}}">
+        <div class="navItem">
+          <mat-icon>{{navItem.value.icon}}</mat-icon>
+          <p>{{navItem.value.title}}</p>
+        </div>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <div class="navigation-toolbar-content">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <div class="navigation-toolbar-content-right">
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>arrow_drop_down</mat-icon>
+            <mat-label>Jason Smit</mat-label>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Account</button>
+            <button mat-menu-item>Logout</button>
+          </mat-menu>
+        </div>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
