@@ -1,7 +1,7 @@
 <mat-toolbar>
   <div class="roster-toolbar-content">
     <div class="roster-header-container">
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" mat-icon-button>
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
@@ -11,44 +11,55 @@
       </mat-menu>
       <mat-label>671 Pump</mat-label>
     </div>
-    <div class="roster-navigation-container">
-      <button mat-button (click)="navigateBackward()">
-        <mat-icon>navigate_before</mat-icon>
-      </button>
-      <mat-label>{{dateConstants.getMonth(this.selectedMonth)}}</mat-label>
-      <button mat-button (click)="navigateForward()">
-        <mat-icon>navigate_next</mat-icon>
-      </button>
-    </div>
+
+    <!--  Generate the Calendar navigation  -->
+    <ng-container *ngIf="(currentPeriodHeader$ | async) as periodHeader">
+      <div class="roster-navigation-container">
+        <button (click)="navigateBackward()" mat-button>
+          <mat-icon>navigate_before</mat-icon>
+        </button>
+        <mat-label>{{periodHeader}}</mat-label>
+        <button (click)="navigateForward()" mat-button>
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+      </div>
+    </ng-container>
+
   </div>
 </mat-toolbar>
 
 <mat-grid-list cols="7" rowHeight="30px">
+
+  <!-- Generate the Day headers for the calendar -->
   <mat-grid-tile *ngFor="let header of dateConstants.getDayStrings()" style="background: green">
     <mat-label>{{header}}</mat-label>
   </mat-grid-tile>
-  <mat-grid-tile
-    *ngFor="let rosterDay of selectedRosterDays$ | async"
-    colspan="1"
-    rowspan="11"
-  >
-    <mat-grid-tile-header>
-      <div class="roster-tile-header">
-        <mat-label>{{dateConstants.getMonth(rosterDay.date)}}</mat-label>
-        <button mat-button color="accent">
-          <mat-icon>edit</mat-icon>
-        </button>
+
+  <!-- Generate the day block when there is a Roster Period-->
+  <ng-container *ngIf="(selectCurrentRosterPeriod$ | async) as rosterPeriod">
+    <mat-grid-tile
+      *ngFor="let rosterDay of rosterPeriod.rosterDays"
+      colspan="1"
+      rowspan="11"
+    >
+      <mat-grid-tile-header>
+        <div class="roster-tile-header">
+          <mat-label>{{rosterDay.date | date: 'mediumDate'}}</mat-label>
+          <button color="accent" mat-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </mat-grid-tile-header>
+      <div class="roster-tile-content">
+        <mat-list>
+          <ng-container *ngFor="let slot of rosterDay.slots; let itemIndex=index;">
+            <mat-list-item>
+              <mat-label>{{slot}}</mat-label>
+            </mat-list-item>
+            <mat-divider *ngIf="itemIndex !== (rosterDay.slots.length - 1)"></mat-divider>
+          </ng-container>
+        </mat-list>
       </div>
-    </mat-grid-tile-header>
-    <div class="roster-tile-content">
-      <mat-list>
-        <ng-container *ngFor="let slot of rosterDay.slots; let itemIndex=index;">
-          <mat-list-item>
-            <mat-label>{{slot}}</mat-label>
-          </mat-list-item>
-          <mat-divider *ngIf="itemIndex !== (rosterDay.slots.length - 1)"></mat-divider>
-        </ng-container>
-      </mat-list>
-    </div>
-  </mat-grid-tile>
+    </mat-grid-tile>
+  </ng-container>
 </mat-grid-list>

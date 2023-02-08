@@ -1,4 +1,4 @@
 export interface RosterDay {
-  date: number;
+  date: Date;
   slots: string[]
 }

@@ -1,0 +1,3118 @@
+{
+    "pipes": [],
+    "interfaces": [
+        {
+            "name": "AppState",
+            "id": "interface-AppState-2f3f8200514a19c2479de0802072b062db915438545f9f07df6a9c4abe2912d139a0207b9773fa2450c92641ca07f186c11435bce4c3ecc6533eee0ee9e840a0",
+            "file": "src/app/app.state.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {RosterState} from \"./features/roster/interfaces/roster-state\";\r\n\r\nexport interface AppState {\r\n  roster: RosterState;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "roster",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "RosterState",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "DashBoardCard",
+            "id": "interface-DashBoardCard-98d9d9f8b28ea9952802f536829877059d3dbc045dffc7a96fb45a46a919e5bfd399547a3f086d3320eb5872eb6b69195b1bd56e58775b836e2c0a834228fa63",
+            "file": "src/app/dashboard/dashboard.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {Component} from '@angular/core';\nimport {map} from 'rxjs/operators';\nimport { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';\nimport {RosterComponent} from \"../features/roster/roster.component\";\nimport {Observable} from \"rxjs\";\nexport interface DashBoardCard {\n  title?: string,\n  cols: number,\n  rows: number,\n  component: typeof RosterComponent | undefined\n}\n\n@Component({\n  selector: 'app-dashboard',\n  templateUrl: './dashboard.component.html',\n  styleUrls: ['./dashboard.component.css']\n})\nexport class DashboardComponent {\n\n  /** Based on the screen size, switch from standard to one column per row */\n  private _cards$: Observable<DashBoardCard[]> = this._breakpointObserver.observe(Breakpoints.Handset).pipe(\n    map( ({ matches }) => [\n      { cols: matches ? 1:2, rows: 1, component: RosterComponent },\n      { title: 'Card 2', cols: 1, rows: 1, component: undefined },\n      { title: 'Card 3', cols: 1, rows: matches ? 1:2, component: undefined },\n      { title: 'Card 4', cols: 1, rows: 1, component: undefined }\n    ])\n  );\n  constructor(private _breakpointObserver: BreakpointObserver) {}\n\n  get cards() {\n    return this._cards$;\n  }\n}\n",
+            "properties": [
+                {
+                    "name": "cols",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "component",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": " | undefined",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "rows",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 7
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "RosterDay",
+            "id": "interface-RosterDay-111c5d5cc84812949043d9cef3e46c6351323fcd7337897d55e720be841b35d5d9fd376b0241e7295167a8b4791dd182995df4bca203b0c91dc2cdaec4eedce3",
+            "file": "src/app/features/roster/interfaces/roster-day.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface RosterDay {\r\n  date: Date;\r\n  slots: string[]\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "date",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "slots",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "RosterPeriod",
+            "id": "interface-RosterPeriod-ffa9c3b3381bfc10ba58c973380ac7cda8828965c65a5c9a4377b91ca1d592ee65c33b6898ac5bad525a957c8a144206a44fba050fbdb2f3734d4fb4c4a7fd39",
+            "file": "src/app/features/roster/interfaces/roster-period.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {RosterDay} from \"./roster-day\";\r\n\r\nexport interface RosterPeriod {\r\n  periodStart: Date;\r\n  periodEnd: Date;\r\n  rosterDays: RosterDay[];\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "periodEnd",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "periodStart",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "rosterDays",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "RosterDay[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "RosterState",
+            "id": "interface-RosterState-823c187f5c06269696ea9bfa798019c8d8f9c35239f54170632bcc99fcdfcf99604c10de64fa48ed6d42ce4070b12f5bfb693fbf112473de34b5054253687750",
+            "file": "src/app/features/roster/interfaces/roster-state.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {IntervalPeriodsEnum} from \"../interval-periods.enum\";\r\nimport {StatusEnum} from \"../../../core/enums/status.enum\";\r\nimport {RosterDay} from \"./roster-day\";\r\nimport {RosterPeriod} from \"./roster-period\";\r\n\r\nexport interface RosterState {\r\n  currentStartDate: Date,\r\n  currentEndDate: Date,\r\n  allRosterPeriods: RosterPeriod[];\r\n  currentRosterPeriod: RosterPeriod | null;\r\n  intervalPeriod: IntervalPeriodsEnum;\r\n  error: string | null;\r\n  status: StatusEnum;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "allRosterPeriods",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "RosterPeriod[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "currentEndDate",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "currentRosterPeriod",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "RosterPeriod | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "currentStartDate",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                },
+                {
+                    "name": "error",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "intervalPeriod",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "IntervalPeriodsEnum",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "status",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StatusEnum",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "URL",
+            "id": "interface-URL-9f354f9510d584ea2b707c6452863012e02917b98610ff963fcc2e67ce1a6b381fce93c19c512370b79dbe170555fb97aa812d44bec3e4dd7c5323ac19372e28",
+            "file": "src/app/core/interfaces/url.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface URL {\r\n  title: string,\r\n  path: string,\r\n  icon: string,\r\n  sortOrder: number\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "path",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                },
+                {
+                    "name": "sortOrder",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "User",
+            "id": "interface-User-9c7e5f1bbbab702cb032307d130876cb68969b0cd4eedef32a0c8cad8081a54e5f8f577ed6ad4539c1b99a1d246cb34031d198c2ea8eba440e64e91b14f01fdc",
+            "file": "src/stories/User.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface User {}\n",
+            "properties": [],
+            "indexSignatures": [],
+            "methods": []
+        }
+    ],
+    "injectables": [
+        {
+            "name": "DateConstants",
+            "id": "injectable-DateConstants-dc6a254c5cc0bb61c7b977edd1019925d927b648bb550799602d10c9e542c6814b663da5cdf14b16130a694157737fe9b7e47d9b2ba0ff880abb38c0ca600c82",
+            "file": "src/app/core/constants/date.constants.ts",
+            "properties": [
+                {
+                    "name": "_DAYS",
+                    "defaultValue": "{\r\n    0: 'Sunday',\r\n    1: 'Monday',\r\n    2: 'Tuesday',\r\n    3: 'Wednesday',\r\n    4: 'Thursday',\r\n    5: 'Friday',\r\n    6: 'Saturday',\r\n  }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 23,
+                    "modifierKind": [
+                        121,
+                        144
+                    ]
+                },
+                {
+                    "name": "_MONTHS",
+                    "defaultValue": "{\r\n    0: 'January',\r\n    1: 'February',\r\n    2: 'March',\r\n    3: 'April',\r\n    4: 'May',\r\n    5: 'June',\r\n    6: 'July',\r\n    7: 'August',\r\n    8: 'September',\r\n    9: 'October',\r\n    10: 'November',\r\n    11: 'December',\r\n  }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        121,
+                        144
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "getDay",
+                    "args": [
+                        {
+                            "name": "day",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 41,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "day",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getDayStrings",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string[]",
+                    "typeParameters": [],
+                    "line": 33,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "getMonth",
+                    "args": [
+                        {
+                            "name": "month",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 37,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "month",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {Injectable, Input} from \"@angular/core\";\r\n\r\n@Injectable()\r\nexport class DateConstants {\r\n\r\n  @Input()\r\n  public isDashboard: boolean | undefined;\r\n  private readonly _MONTHS: {[key: number]: string} = {\r\n    0: 'January',\r\n    1: 'February',\r\n    2: 'March',\r\n    3: 'April',\r\n    4: 'May',\r\n    5: 'June',\r\n    6: 'July',\r\n    7: 'August',\r\n    8: 'September',\r\n    9: 'October',\r\n    10: 'November',\r\n    11: 'December',\r\n  }\r\n\r\n  private readonly _DAYS: {[key: number]: string} = {\r\n    0: 'Sunday',\r\n    1: 'Monday',\r\n    2: 'Tuesday',\r\n    3: 'Wednesday',\r\n    4: 'Thursday',\r\n    5: 'Friday',\r\n    6: 'Saturday',\r\n  }\r\n\r\n  public getDayStrings(): string[] {\r\n    return Object.values(this._DAYS)\r\n  }\r\n\r\n  public getMonth(month: number): string {\r\n    return this._MONTHS[month];\r\n  }\r\n\r\n  public getDay(day: number): string {\r\n    return this._DAYS[day];\r\n  }\r\n}\r\n",
+            "type": "injectable"
+        },
+        {
+            "name": "RosterEffects",
+            "id": "injectable-RosterEffects-2168523255574075ed6a6aab021a57a7fea8af6c713e7844a9dce29ac7114061e5f2441976ca05fb111040314d91d534d6a1850c3b87721165edc04eea010d08",
+            "file": "src/app/features/roster/state/roster.effects.ts",
+            "properties": [
+                {
+                    "name": "_selectedCurrentEndDate$",
+                    "defaultValue": "this._store.select(selectCurrentEndDate)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<Date | undefined>",
+                    "optional": false,
+                    "description": "",
+                    "line": 18,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_selectedCurrentStartDate$",
+                    "defaultValue": "this._store.select(selectCurrentStartDate)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<Date | undefined>",
+                    "optional": false,
+                    "description": "",
+                    "line": 17,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_selectedIntervalPeriod$",
+                    "defaultValue": "this._store.select(selectIntervalPeriod)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<IntervalPeriodsEnum>",
+                    "optional": false,
+                    "description": "",
+                    "line": 19,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "loadRosterDays$",
+                    "defaultValue": "createEffect(() =>\r\n    this._actions$.pipe(\r\n      ofType(RosterApiActions.loadRosterPeriod),\r\n      switchMap(() =>\r\n        from(this._rosterService.loadRosterPeriod()).pipe(\r\n          map(\r\n            (rosterPeriod: RosterPeriod) => {\r\n              RosterActions.updateCurrentlySelectedPeriod(\r\n                {rosterPeriod, periodStart: rosterPeriod.periodStart, periodEnd: rosterPeriod.periodEnd}\r\n              );\r\n              return RosterApiActions.loadRosterPeriodSuccess({ rosterPeriod });\r\n            }\r\n          ),\r\n          catchError(\r\n            (error: string) => of(RosterApiActions.loadRosterPeriodFailure({ error }))\r\n          )\r\n        )\r\n      )\r\n    )\r\n  )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23,
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methods": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {Store} from \"@ngrx/store\";\r\nimport {Actions, createEffect, ofType} from \"@ngrx/effects\";\r\nimport {RosterService} from \"../services/roster.service\";\r\nimport {RosterActions, RosterApiActions} from \"./roster.actions\";\r\nimport {catchError, from, Observable, of, switchMap} from \"rxjs\";\r\nimport {map} from \"rxjs/operators\";\r\nimport {AppState} from \"../../../app.state\";\r\nimport {selectCurrentEndDate, selectCurrentStartDate, selectIntervalPeriod} from \"./roster.selectors\";\r\nimport {IntervalPeriodsEnum} from \"../interval-periods.enum\";\r\nimport {RosterPeriod} from \"../interfaces/roster-period\";\r\nimport {Injectable} from \"@angular/core\";\r\n\r\n@Injectable()\r\nexport class RosterEffects {\r\n  constructor( private _actions$: Actions, private _store: Store<AppState>, private _rosterService: RosterService) {}\r\n\r\n  private _selectedCurrentStartDate$: Observable<Date | undefined> = this._store.select(selectCurrentStartDate);\r\n  private _selectedCurrentEndDate$: Observable<Date | undefined> = this._store.select(selectCurrentEndDate);\r\n  private _selectedIntervalPeriod$: Observable<IntervalPeriodsEnum> = this._store.select(selectIntervalPeriod);\r\n\r\n\r\n\r\n  public loadRosterDays$ = createEffect(() =>\r\n    this._actions$.pipe(\r\n      ofType(RosterApiActions.loadRosterPeriod),\r\n      switchMap(() =>\r\n        from(this._rosterService.loadRosterPeriod()).pipe(\r\n          map(\r\n            (rosterPeriod: RosterPeriod) => {\r\n              RosterActions.updateCurrentlySelectedPeriod(\r\n                {rosterPeriod, periodStart: rosterPeriod.periodStart, periodEnd: rosterPeriod.periodEnd}\r\n              );\r\n              return RosterApiActions.loadRosterPeriodSuccess({ rosterPeriod });\r\n            }\r\n          ),\r\n          catchError(\r\n            (error: string) => of(RosterApiActions.loadRosterPeriodFailure({ error }))\r\n          )\r\n        )\r\n      )\r\n    )\r\n  )\r\n\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "_actions$",
+                        "type": "Actions",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "_store",
+                        "type": "Store<AppState>",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "_rosterService",
+                        "type": "RosterService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 14,
+                "jsdoctags": [
+                    {
+                        "name": "_actions$",
+                        "type": "Actions",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "_store",
+                        "type": "Store<AppState>",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "_rosterService",
+                        "type": "RosterService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
+        },
+        {
+            "name": "RosterService",
+            "id": "injectable-RosterService-b7607b26a83a7bd75c94581f4a8b992f62a0023dba6ce663eb341f47179781c3f6d549ea9f148c16b6b445f4e3af5766c9a3fade1c48b15c2ce22e4de90d8f92",
+            "file": "src/app/features/roster/services/roster.service.ts",
+            "properties": [
+                {
+                    "name": "_selectedCurrentEndDate$",
+                    "defaultValue": "this._store.select(selectCurrentEndDate)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<Date | undefined>",
+                    "optional": false,
+                    "description": "",
+                    "line": 30,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_selectedCurrentStartDate$",
+                    "defaultValue": "this._store.select(selectCurrentStartDate)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<Date | undefined>",
+                    "optional": false,
+                    "description": "",
+                    "line": 29,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_selectedIntervalPeriod$",
+                    "defaultValue": "this._store.select(selectIntervalPeriod)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<IntervalPeriodsEnum>",
+                    "optional": false,
+                    "description": "",
+                    "line": 31,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "dudPeriod",
+                    "defaultValue": "{\r\n    periodStart: new Date(),\r\n    periodEnd: new Date(),\r\n    rosterDays: []\r\n  }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "RosterPeriod",
+                    "optional": false,
+                    "description": "",
+                    "line": 33,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "month",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 27,
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "_calculateNewDate",
+                    "args": [
+                        {
+                            "name": "intervalPeriod",
+                            "type": "IntervalPeriodsEnum",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "start",
+                            "type": "Date | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "end",
+                            "type": "Date | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "[]",
+                    "typeParameters": [],
+                    "line": 47,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "intervalPeriod",
+                            "type": "IntervalPeriodsEnum",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "start",
+                            "type": "Date | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "end",
+                            "type": "Date | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "_getRosterDays",
+                    "args": [
+                        {
+                            "name": "startDate",
+                            "type": "Date | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "endDate",
+                            "type": "Date | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<RosterPeriod>",
+                    "typeParameters": [],
+                    "line": 42,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "startDate",
+                            "type": "Date | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "endDate",
+                            "type": "Date | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "generateData",
+                    "args": [
+                        {
+                            "name": "periodStart",
+                            "type": "Date",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "periodEnd",
+                            "type": "Date",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "RosterPeriod",
+                    "typeParameters": [],
+                    "line": 85,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nDispatches two actions which will update the RosterState period dates\n",
+                    "description": "<p>Dispatches two actions which will update the RosterState period dates</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "periodStart",
+                            "type": "Date",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "periodEnd",
+                            "type": "Date",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "tagName": {
+                                "pos": 2851,
+                                "end": 2858,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "originalKeywordKind": 121,
+                                "escapedText": "private"
+                            },
+                            "comment": "<p>This is specific to the roster feature, and should be used in the service.</p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "loadRosterPeriod",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<RosterPeriod>",
+                    "typeParameters": [],
+                    "line": 63,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {Injectable} from \"@angular/core\";\r\nimport {RosterDay} from \"../interfaces/roster-day\";\r\nimport {\r\n  combineLatest, defaultIfEmpty, EMPTY, iif, isEmpty, mergeAll,\r\n  Observable,\r\n  of,\r\n  switchMap,\r\n  take, takeLast, tap,\r\n} from \"rxjs\";\r\nimport {Store} from \"@ngrx/store\";\r\nimport {\r\n  selectCurrentEndDate,\r\n  selectCurrentRosterPeriod,\r\n  selectCurrentStartDate,\r\n  selectIntervalPeriod, selectRosterPeriodFromDates\r\n} from \"../state/roster.selectors\";\r\nimport {IntervalPeriodsEnum} from \"../interval-periods.enum\";\r\nimport {map} from \"rxjs/operators\";\r\nimport {RosterPeriod} from \"../interfaces/roster-period\";\r\nimport {RosterActions, RosterApiActions} from \"../state/roster.actions\";\r\n\r\n@Injectable(\r\n  { providedIn: 'root' }\r\n)\r\nexport class RosterService {\r\n\r\n  public month: number = 0;\r\n\r\n  private _selectedCurrentStartDate$: Observable<Date | undefined> = this._store.select(selectCurrentStartDate);\r\n  private _selectedCurrentEndDate$: Observable<Date | undefined> = this._store.select(selectCurrentEndDate);\r\n  private _selectedIntervalPeriod$: Observable<IntervalPeriodsEnum> = this._store.select(selectIntervalPeriod);\r\n\r\n  public dudPeriod: RosterPeriod = {\r\n    periodStart: new Date(),\r\n    periodEnd: new Date(),\r\n    rosterDays: []\r\n  }\r\n\r\n  constructor(private _store: Store) {\r\n  }\r\n\r\n  private _getRosterDays(startDate: Date | undefined, endDate: Date | undefined): Observable<RosterPeriod> {\r\n\r\n    return of(this.generateData(startDate!, endDate!));\r\n  }\r\n\r\n  private _calculateNewDate(intervalPeriod: IntervalPeriodsEnum, start: Date | undefined, end: Date | undefined): (Date|undefined)[] {\r\n    let newStart = undefined;\r\n    let newEnd = undefined;\r\n\r\n    if(!start && !start) {\r\n      let today: Date = new Date();\r\n      newStart = new Date(today.getFullYear(), today.getMonth(),  1);\r\n      newEnd = new Date(today.getFullYear(), today.getMonth() + 1,  0);\r\n    } else if(intervalPeriod === IntervalPeriodsEnum.Month && end) {\r\n      let newStart = new Date(end.getFullYear(), end.getMonth() + 2, 0);\r\n      let newEnd = new Date(newStart.getFullYear(), newStart.getMonth(), 1);\r\n    }\r\n\r\n    return [newStart, newEnd]\r\n  }\r\n\r\n  public loadRosterPeriod(): Observable<RosterPeriod> {\r\n    return combineLatest([this._selectedIntervalPeriod$, this._selectedCurrentStartDate$, this._selectedCurrentEndDate$])\r\n      .pipe(\r\n        take(1),\r\n        switchMap(([intervalPeriod, startDate, endDate]) => {\r\n          let [newStart, newEnd] = this._calculateNewDate(intervalPeriod, startDate, endDate);\r\n          return this._getRosterDays(newStart, newEnd);\r\n        }\r\n      ));\r\n  }\r\n\r\n  /**\r\n   * Dispatches two actions which will update the RosterState period dates\r\n   * @param startDate The date of the currently selected period start\r\n   * @param endDate The date of the currently selected period end\r\n   * @private This is specific to the roster feature, and should be used in the service.\r\n   */\r\n  // private _updatePeriodDates(startDate: Date | undefined, endDate: Date | undefined): void {\r\n  //   this._store.dispatch(RosterActions.updatePeriodStart({periodStart: startDate}));\r\n  //   this._store.dispatch(RosterActions.updatePeriodEnd({periodEnd: endDate}));\r\n  // }\r\n\r\n  private generateData(periodStart: Date, periodEnd: Date): RosterPeriod {\r\n    return {\r\n      periodStart: periodStart,\r\n      periodEnd: periodEnd,\r\n      rosterDays: Array.from(Array(periodEnd.getDate()).keys()).map(day => {\r\n        return {\r\n          date: new Date(periodStart.getFullYear(), periodStart.getMonth(), day + 1),\r\n          slots: [\r\n            'Jason' + this.month,\r\n            'Walter'+ this.month,\r\n            'Ryan' + this.month,\r\n            'Mike' + this.month\r\n          ]\r\n        }\r\n      })\r\n    }\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "_store",
+                        "type": "Store",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 37,
+                "jsdoctags": [
+                    {
+                        "name": "_store",
+                        "type": "Store",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
+        },
+        {
+            "name": "RoutingConstants",
+            "id": "injectable-RoutingConstants-210f73b4c470b0615d3c9398207696d0881c66cad634f1ff5bd432bde43c30a8093b4423b02a3d733d4e58ad1f69e111dda34f611b5aaa84d4dc62146d38641b",
+            "file": "src/app/core/constants/routing.constants.ts",
+            "properties": [
+                {
+                    "name": "APP_URLS",
+                    "defaultValue": "{\r\n    DASHBOARD: {\r\n      title: 'Dashboard',\r\n      path: '/dashboard',\r\n      icon: 'dashboard',\r\n      sortOrder: 0\r\n    },\r\n    ROSTERS: {\r\n      title: 'Rosters',\r\n      path: '/rosters',\r\n      icon: 'calendar_month',\r\n      sortOrder: 1\r\n    },\r\n    APPLIANCE: {\r\n      title: 'Appliance',\r\n      path: '/appliance',\r\n      icon: 'fire_truck',\r\n      sortOrder: 2\r\n    }\r\n  }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 9,
+                    "modifierKind": [
+                        123,
+                        144
+                    ]
+                }
+            ],
+            "methods": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {Injectable, Input} from \"@angular/core\";\r\nimport {URL} from \"../interfaces/url\";\r\n\r\n@Injectable()\r\nexport class RoutingConstants {\r\n\r\n  @Input()\r\n  public isDashboard: boolean | undefined;\r\n  public readonly APP_URLS: {[key: string]: URL} = {\r\n    DASHBOARD: {\r\n      title: 'Dashboard',\r\n      path: '/dashboard',\r\n      icon: 'dashboard',\r\n      sortOrder: 0\r\n    },\r\n    ROSTERS: {\r\n      title: 'Rosters',\r\n      path: '/rosters',\r\n      icon: 'calendar_month',\r\n      sortOrder: 1\r\n    },\r\n    APPLIANCE: {\r\n      title: 'Appliance',\r\n      path: '/appliance',\r\n      icon: 'fire_truck',\r\n      sortOrder: 2\r\n    }\r\n  }\r\n}\r\n",
+            "type": "injectable"
+        }
+    ],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [
+        {
+            "name": "InjectComponent",
+            "id": "directive-InjectComponent-496397b8b5c7a930b8319ce40a00c20469ecbfb26d9ec50a6a90c6b29bfcb4b92c1c2fc61c265dbdbaaa70ddbdcadd123d15b741b7fb33030f8c824e59cc714e",
+            "file": "src/app/core/directives/inject-component.directive.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {ComponentRef, Directive, Input, OnInit, ViewContainerRef} from '@angular/core';\nimport {RosterComponent} from \"../../features/roster/roster.component\";\n\n@Directive({\n  selector: '[injectComponent]',\n})\nexport class InjectComponent implements OnInit{\n\n  @Input() injectComponent: typeof RosterComponent | undefined;\n\n  constructor(private _viewContainerRef: ViewContainerRef) { }\n\n  ngOnInit(): void {\n    if(this.injectComponent) {\n      const component: ComponentRef<any> = this._viewContainerRef.createComponent(this.injectComponent);\n      (component.instance as RosterComponent).isDashboard = true;\n      this._viewContainerRef.insert(component.hostView, 0);\n    }\n  }\n\n}\n",
+            "selector": "[injectComponent]",
+            "providers": [],
+            "inputsClass": [
+                {
+                    "name": "injectComponent",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": " | undefined",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 13,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "implements": [
+                "OnInit"
+            ],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "_viewContainerRef",
+                        "type": "ViewContainerRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 9,
+                "jsdoctags": [
+                    {
+                        "name": "_viewContainerRef",
+                        "type": "ViewContainerRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "components": [
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-b96e857a98e1c59fc0524c891b44ea04c6badb6c86d3755a559edcfab1dc720d7f08b06f2931ced71541d5470c5ddb319034b4ccdfa92b93dba0500530015fb8",
+            "file": "src/app/app.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [
+                "./app.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./app.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "title",
+                    "defaultValue": "'RACS-client'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n  title = 'RACS-client';\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./app.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<app-navigation-menu></app-navigation-menu>\n"
+        },
+        {
+            "name": "ButtonComponent",
+            "id": "component-ButtonComponent-4ef205c97a334c309aa4001c8ab4a6d9571dcae18d0e85aaf0d367467ab5d3a9f13ab3573726f1fcb409bc9b49894dadfb80b1bbe1b6ba7041455ad9d4922004",
+            "file": "src/stories/button.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-button",
+            "styleUrls": [
+                "./button.css"
+            ],
+            "styles": [],
+            "template": "<button   type=\"button\"\n   (click)=\"onClick.emit($event)\"\n   [ngClass]=\"classes\"\n   [ngStyle]=\"{ 'background-color': backgroundColor }\"\n >\n   {{ label }}\n </button>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "backgroundColor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nWhat background color to use\n",
+                    "description": "<p>What background color to use</p>\n",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Button'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "pos": 711,
+                            "end": 724,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 325,
+                            "tagName": {
+                                "pos": 712,
+                                "end": 720,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "required"
+                            },
+                            "comment": ""
+                        }
+                    ],
+                    "rawdescription": "\n\nButton contents\n\n",
+                    "description": "<p>Button contents</p>\n",
+                    "line": 40,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "primary",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nIs this the principal call to action on the page?\n",
+                    "description": "<p>Is this the principal call to action on the page?</p>\n",
+                    "line": 20,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'medium'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nHow large should the button be?\n",
+                    "description": "<p>How large should the button be?</p>\n",
+                    "line": 32,
+                    "type": "\"small\" | \"medium\" | \"large\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onClick",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nOptional click handler\n",
+                    "description": "<p>Optional click handler</p>\n",
+                    "line": 46,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  template: ` <button\n    type=\"button\"\n    (click)=\"onClick.emit($event)\"\n    [ngClass]=\"classes\"\n    [ngStyle]=\"{ 'background-color': backgroundColor }\"\n  >\n    {{ label }}\n  </button>`,\n  styleUrls: ['./button.css'],\n})\nexport default class ButtonComponent {\n  /**\n   * Is this the principal call to action on the page?\n   */\n  @Input()\n  primary = false;\n\n  /**\n   * What background color to use\n   */\n  @Input()\n  backgroundColor?: string;\n\n  /**\n   * How large should the button be?\n   */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /**\n   * Optional click handler\n   */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-button {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  border: 0;\n  border-radius: 3em;\n  cursor: pointer;\n  display: inline-block;\n  line-height: 1;\n}\n.storybook-button--primary {\n  color: white;\n  background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n  color: #333;\n  background-color: transparent;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n  font-size: 12px;\n  padding: 10px 16px;\n}\n.storybook-button--medium {\n  font-size: 14px;\n  padding: 11px 20px;\n}\n.storybook-button--large {\n  font-size: 16px;\n  padding: 12px 24px;\n}\n",
+                    "styleUrl": "./button.css"
+                }
+            ],
+            "stylesData": "",
+            "accessors": {
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 48
+                    }
+                }
+            }
+        },
+        {
+            "name": "DashboardComponent",
+            "id": "component-DashboardComponent-98d9d9f8b28ea9952802f536829877059d3dbc045dffc7a96fb45a46a919e5bfd399547a3f086d3320eb5872eb6b69195b1bd56e58775b836e2c0a834228fa63",
+            "file": "src/app/dashboard/dashboard.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-dashboard",
+            "styleUrls": [
+                "./dashboard.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./dashboard.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "_cards$",
+                    "defaultValue": "this._breakpointObserver.observe(Breakpoints.Handset).pipe(\n    map( ({ matches }) => [\n      { cols: matches ? 1:2, rows: 1, component: RosterComponent },\n      { title: 'Card 2', cols: 1, rows: 1, component: undefined },\n      { title: 'Card 3', cols: 1, rows: matches ? 1:2, component: undefined },\n      { title: 'Card 4', cols: 1, rows: 1, component: undefined }\n    ])\n  )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<DashBoardCard[]>",
+                    "optional": false,
+                    "description": "<p>Based on the screen size, switch from standard to one column per row</p>\n",
+                    "line": 21,
+                    "rawdescription": "\nBased on the screen size, switch from standard to one column per row",
+                    "modifierKind": [
+                        121
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component} from '@angular/core';\nimport {map} from 'rxjs/operators';\nimport { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';\nimport {RosterComponent} from \"../features/roster/roster.component\";\nimport {Observable} from \"rxjs\";\nexport interface DashBoardCard {\n  title?: string,\n  cols: number,\n  rows: number,\n  component: typeof RosterComponent | undefined\n}\n\n@Component({\n  selector: 'app-dashboard',\n  templateUrl: './dashboard.component.html',\n  styleUrls: ['./dashboard.component.css']\n})\nexport class DashboardComponent {\n\n  /** Based on the screen size, switch from standard to one column per row */\n  private _cards$: Observable<DashBoardCard[]> = this._breakpointObserver.observe(Breakpoints.Handset).pipe(\n    map( ({ matches }) => [\n      { cols: matches ? 1:2, rows: 1, component: RosterComponent },\n      { title: 'Card 2', cols: 1, rows: 1, component: undefined },\n      { title: 'Card 3', cols: 1, rows: matches ? 1:2, component: undefined },\n      { title: 'Card 4', cols: 1, rows: 1, component: undefined }\n    ])\n  );\n  constructor(private _breakpointObserver: BreakpointObserver) {}\n\n  get cards() {\n    return this._cards$;\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".grid-container {\n  margin: 20px;\n}\n\n.dashboard-card {\n  position: absolute;\n  top: 15px;\n  left: 15px;\n  right: 15px;\n  bottom: 15px;\n}\n\n.more-button {\n  position: absolute;\n  top: 5px;\n  right: 10px;\n}\n\n.dashboard-card-content {\n  text-align: center;\n}\n",
+                    "styleUrl": "./dashboard.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "_breakpointObserver",
+                        "type": "BreakpointObserver",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 28,
+                "jsdoctags": [
+                    {
+                        "name": "_breakpointObserver",
+                        "type": "BreakpointObserver",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "accessors": {
+                "cards": {
+                    "name": "cards",
+                    "getSignature": {
+                        "name": "cards",
+                        "type": "",
+                        "returnType": "",
+                        "line": 31
+                    }
+                }
+            },
+            "templateData": "<div class=\"grid-container\">\n  <mat-grid-list cols=\"2\" rowHeight=\"450px\">\n    <mat-grid-tile *ngFor=\"let card of cards | async\" [colspan]=\"card.cols\" [rowspan]=\"card.rows\">\n      <mat-card class=\"dashboard-card\">\n        <mat-card-content class=\"dashboard-card-content\" id=\"{{card.title}}\">\n          <div *injectComponent=\"card.component\"></div>\n        </mat-card-content>\n      </mat-card>\n    </mat-grid-tile>\n  </mat-grid-list>\n</div>\n"
+        },
+        {
+            "name": "HeaderComponent",
+            "id": "component-HeaderComponent-a557eec14f72c438a8033301f4d6ce023e0a1844a3b06ec2b38794a612acc31735ae78a5ee10071b230c8c20d699eb914554e69d07ade54adb371da8efb464cc",
+            "file": "src/stories/header.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-header",
+            "styleUrls": [
+                "./header.css"
+            ],
+            "styles": [],
+            "template": "<header>    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <div *ngIf=\"user\">\n          <span class=\"welcome\">\n            Welcome, <b>{{ user.name }}</b\n            >!\n          </span>\n          <storybook-button\n            *ngIf=\"user\"\n            size=\"small\"\n            (onClick)=\"onLogout.emit($event)\"\n            label=\"Log out\"\n          ></storybook-button>\n        </div>\n        <div *ngIf=\"!user\">\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            class=\"margin-left\"\n            (onClick)=\"onLogin.emit($event)\"\n            label=\"Log in\"\n          ></storybook-button>\n          <storybook-button\n            *ngIf=\"!user\"\n            primary\n            size=\"small\"\n            primary=\"true\"\n            class=\"margin-left\"\n            (onClick)=\"onCreateAccount.emit($event)\"\n            label=\"Sign up\"\n          ></storybook-button>\n        </div>\n      </div>\n    </div>\n  </header>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 65,
+                    "type": "User | null",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onCreateAccount",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 74,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogin",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 68,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogout",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 71,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { User } from './User';\n\n@Component({\n  selector: 'storybook-header',\n  template: `<header>\n    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <div *ngIf=\"user\">\n          <span class=\"welcome\">\n            Welcome, <b>{{ user.name }}</b\n            >!\n          </span>\n          <storybook-button\n            *ngIf=\"user\"\n            size=\"small\"\n            (onClick)=\"onLogout.emit($event)\"\n            label=\"Log out\"\n          ></storybook-button>\n        </div>\n        <div *ngIf=\"!user\">\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            class=\"margin-left\"\n            (onClick)=\"onLogin.emit($event)\"\n            label=\"Log in\"\n          ></storybook-button>\n          <storybook-button\n            *ngIf=\"!user\"\n            primary\n            size=\"small\"\n            primary=\"true\"\n            class=\"margin-left\"\n            (onClick)=\"onCreateAccount.emit($event)\"\n            label=\"Sign up\"\n          ></storybook-button>\n        </div>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport default class HeaderComponent {\n  @Input()\n  user: User | null = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".wrapper {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\nsvg {\n  display: inline-block;\n  vertical-align: top;\n}\n\nh1 {\n  font-weight: 900;\n  font-size: 20px;\n  line-height: 1;\n  margin: 6px 0 6px 10px;\n  display: inline-block;\n  vertical-align: top;\n}\n\nbutton + button {\n  margin-left: 10px;\n}\n\n.welcome {\n  color: #333;\n  font-size: 14px;\n  margin-right: 10px;\n}\n",
+                    "styleUrl": "./header.css"
+                }
+            ],
+            "stylesData": ""
+        },
+        {
+            "name": "NavigationMenuComponent",
+            "id": "component-NavigationMenuComponent-4048d4cf166e51470c4073f691a8c7a60b64547a7601a83974dbe9c059a43c68c460e1c5eee369746f81a1bce8cd3cf6ac753292dcf43ced2616a3d04a1ad520",
+            "file": "src/app/navigation-menu/navigation-menu.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-navigation-menu",
+            "styleUrls": [
+                "./navigation-menu.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./navigation-menu.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "isHandset$",
+                    "defaultValue": "this.breakpointObserver.observe(Breakpoints.Handset)\n    .pipe(\n      map(result => result.matches),\n      shareReplay()\n    )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<boolean>",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "navMenuItems",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type | undefined",
+                    "optional": false,
+                    "description": "",
+                    "line": 15,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "routerLinks",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "RoutingConstants",
+                    "optional": false,
+                    "description": "",
+                    "line": 25,
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 27,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, OnInit} from '@angular/core';\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\nimport { Observable } from 'rxjs';\nimport { map, shareReplay } from 'rxjs/operators';\nimport {RoutingConstants} from \"../core/constants/routing.constants\";\nimport {URL} from \"../core/interfaces/url\";\n\n@Component({\n  selector: 'app-navigation-menu',\n  templateUrl: './navigation-menu.component.html',\n  styleUrls: ['./navigation-menu.component.css']\n})\nexport class NavigationMenuComponent implements OnInit{\n\n  public navMenuItems: {[key: string]: URL} | undefined;\n\n  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)\n    .pipe(\n      map(result => result.matches),\n      shareReplay()\n    );\n\n  constructor(\n    private breakpointObserver: BreakpointObserver,\n    public routerLinks: RoutingConstants) {}\n\n  ngOnInit(): void {\n    this.navMenuItems = this.routerLinks.APP_URLS;\n  }\n\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".sidenav-container {\n  height: 100%;\n}\n\n.sidenav {\n  width: 200px;\n}\n\n.sidenav .mat-toolbar {\n  background: inherit;\n}\n\n.mat-toolbar.mat-primary {\n  position: sticky;\n  top: 0;\n  z-index: 1;\n}\n\n.navigation-toolbar-content {\n  width: 100%;\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n}\n\n.navigation-toolbar-content-right {\n  display: flex;\n  width: 100%;\n  justify-content: flex-end;\n  align-items: center;\n  grid-column: 3;\n}\n\n.navItem {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  gap: 5px;\n}\n\n.navItem > p {\n  margin: 0;\n}\n",
+                    "styleUrl": "./navigation-menu.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "breakpointObserver",
+                        "type": "BreakpointObserver",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "routerLinks",
+                        "type": "RoutingConstants",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 21,
+                "jsdoctags": [
+                    {
+                        "name": "breakpointObserver",
+                        "type": "BreakpointObserver",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "routerLinks",
+                        "type": "RoutingConstants",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<mat-sidenav-container class=\"sidenav-container\">\n  <mat-sidenav #drawer class=\"sidenav\" fixedInViewport\n      [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\n      [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\n      [opened]=\"(isHandset$ | async) === false\">\n    <mat-toolbar>RACS</mat-toolbar>\n    <mat-nav-list>\n      <a *ngFor=\"let navItem of navMenuItems | keyvalue\" mat-list-item href=\"{{navItem.value.path}}\">\n        <div class=\"navItem\">\n          <mat-icon>{{navItem.value.icon}}</mat-icon>\n          <p>{{navItem.value.title}}</p>\n        </div>\n      </a>\n    </mat-nav-list>\n  </mat-sidenav>\n  <mat-sidenav-content>\n    <mat-toolbar color=\"primary\">\n      <div class=\"navigation-toolbar-content\">\n        <button\n          type=\"button\"\n          aria-label=\"Toggle sidenav\"\n          mat-icon-button\n          (click)=\"drawer.toggle()\"\n          *ngIf=\"isHandset$ | async\">\n          <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\n        </button>\n        <div class=\"navigation-toolbar-content-right\">\n          <button mat-button [matMenuTriggerFor]=\"menu\">\n            <mat-icon>arrow_drop_down</mat-icon>\n            <mat-label>Jason Smit</mat-label>\n          </button>\n          <mat-menu #menu=\"matMenu\">\n            <button mat-menu-item>Account</button>\n            <button mat-menu-item>Logout</button>\n          </mat-menu>\n        </div>\n      </div>\n    </mat-toolbar>\n    <router-outlet></router-outlet>\n  </mat-sidenav-content>\n</mat-sidenav-container>\n"
+        },
+        {
+            "name": "PageComponent",
+            "id": "component-PageComponent-7126d8c2607c946741c651482413b43feb72b2d63cac9d3ac173fde206a5e635eb4cdbf7ca7ac9327c7d4d05cf7ef619144c34c11609ad677081d0ee4e855064",
+            "file": "src/stories/page.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-page",
+            "styleUrls": [
+                "./page.css"
+            ],
+            "styles": [],
+            "template": "<article>    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "User | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 64
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "doCreateAccount",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 74,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "doLogin",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 70,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "doLogout",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 66,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { User } from './User';\n\n@Component({\n  selector: 'storybook-page',\n  template: `<article>\n    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>`,\n  styleUrls: ['./page.css'],\n})\nexport default class PageComponent {\n  user: User | null = null;\n\n  doLogout() {\n    this.user = null;\n  }\n\n  doLogin() {\n    this.user = { name: 'Jane Doe' };\n  }\n\n  doCreateAccount() {\n    this.user = { name: 'Jane Doe' };\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "section {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 24px;\n  padding: 48px 20px;\n  margin: 0 auto;\n  max-width: 600px;\n  color: #333;\n}\n\nsection h2 {\n  font-weight: 900;\n  font-size: 32px;\n  line-height: 1;\n  margin: 0 0 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n\nsection p {\n  margin: 1em 0;\n}\n\nsection a {\n  text-decoration: none;\n  color: #1ea7fd;\n}\n\nsection ul {\n  padding-left: 30px;\n  margin: 1em 0;\n}\n\nsection li {\n  margin-bottom: 8px;\n}\n\nsection .tip {\n  display: inline-block;\n  border-radius: 1em;\n  font-size: 11px;\n  line-height: 12px;\n  font-weight: 700;\n  background: #e7fdd8;\n  color: #66bf3c;\n  padding: 4px 12px;\n  margin-right: 10px;\n  vertical-align: top;\n}\n\nsection .tip-wrapper {\n  font-size: 13px;\n  line-height: 20px;\n  margin-top: 40px;\n  margin-bottom: 40px;\n}\n\nsection .tip-wrapper svg {\n  display: inline-block;\n  height: 12px;\n  width: 12px;\n  margin-right: 4px;\n  vertical-align: top;\n  margin-top: 3px;\n}\n\nsection .tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
+                    "styleUrl": "./page.css"
+                }
+            ],
+            "stylesData": ""
+        },
+        {
+            "name": "RosterCardComponent",
+            "id": "component-RosterCardComponent-d563b74d0d308632009d5e78c54e997052bffc8522c42a357cd1ae13b645ac8f0cde53250a1824eea14edd6e18c8d3ad7d484403ba2090db4397d470ec8f9dfa",
+            "file": "src/app/roster-card/roster-card.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-roster-card",
+            "styleUrls": [
+                "./roster-card.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./roster-card.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "connectionList",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "CdkDropList",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "done",
+                    "defaultValue": "[\n    'Get up',\n    'Brush teeth',\n    'Take a shower',\n    'Check e-mail',\n    'Walk dog'\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                },
+                {
+                    "name": "todo",
+                    "defaultValue": "[\n    'Get to work',\n    'Pick up groceries',\n    'Go home',\n    'Fall asleep'\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "drop",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "CdkDragDrop<string[]>",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "CdkDragDrop<string[]>",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 40,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, Input, OnInit} from '@angular/core';\nimport {CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';\n\n@Component({\n  selector: 'app-roster-card',\n  templateUrl: './roster-card.component.html',\n  styleUrls: ['./roster-card.component.css'],\n})\nexport class RosterCardComponent implements OnInit{\n\n  @Input('connectionList')\n  // @ts-ignore\n  public connectedTo: CdkDropList\n  todo = [\n    'Get to work',\n    'Pick up groceries',\n    'Go home',\n    'Fall asleep'\n  ];\n\n  done = [\n    'Get up',\n    'Brush teeth',\n    'Take a shower',\n    'Check e-mail',\n    'Walk dog'\n  ];\n\n  drop(event: CdkDragDrop<string[]>): void {\n    if (event.previousContainer === event.container) {\n      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);\n    } else {\n      transferArrayItem(event.previousContainer.data,\n          event.container.data,\n          event.previousIndex,\n          event.currentIndex);\n    }\n  }\n\n  ngOnInit(): void {\n    if(this.connectedTo === null) {\n      throw new Error('Attribute required');\n    }\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".container {\n  width: 400px;\n  max-width: 100%;\n  margin: 0 20px;\n  display: inline-block;\n  vertical-align: top;\n}\n\n.list {\n  border: solid 1px #ccc;\n  min-height: 60px;\n  background: white;\n  border-radius: 4px;\n  display: block;\n  overflow: hidden;\n}\n\n.list-item {\n  padding: 20px 10px;\n  border-bottom: solid 1px #ccc;\n  box-sizing: border-box;\n  cursor: move;\n  background: white;\n  color: black;\n  font-size: 14px;\n}\n\n.list-item:last-child {\n  border: none;\n}\n\n/* Highlight the list item that is being dragged. */\n.cdk-drag-preview {\n  border-radius: 4px;\n  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),\n              0 8px 10px 1px rgba(0, 0, 0, 0.14),\n              0 3px 14px 2px rgba(0, 0, 0, 0.12);\n}\n\n/* Animate items as they're being sorted. */\n.cdk-drop-list-dragging .cdk-drag {\n  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);\n}\n\n/* Animate an item that has been dropped. */\n.cdk-drag-animating {\n  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);\n}\n\n.cdk-drag-placeholder {\n  opacity: 0;\n}\n\n",
+                    "styleUrl": "./roster-card.component.css"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div>\n  <mat-list>\n    <mat-list-item *ngFor=\"let item of todo\" cdkDrag>{{item}}</mat-list-item>\n  </mat-list>\n</div>\n"
+        },
+        {
+            "name": "RosterComponent",
+            "id": "component-RosterComponent-5762058edab69aedfa42f35f9a13f97d6e296b2c3ff2514b8d1902f305ad72e5e80cf9c680e61f09d967fb414df962348a30b5ec36b7507a62c183448ca7b18d",
+            "file": "src/app/features/roster/roster.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-roster",
+            "styleUrls": [
+                "./roster.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./roster.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "isDashboard",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "boolean | undefined",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "currentPeriodHeader$",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<string | null>",
+                    "optional": false,
+                    "description": "",
+                    "line": 22,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "dateConstants",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "DateConstants",
+                    "optional": false,
+                    "description": "",
+                    "line": 25,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "selectCurrentRosterPeriod$",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<RosterPeriod | null>",
+                    "optional": false,
+                    "description": "",
+                    "line": 21,
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "_getPeriodString",
+                    "args": [
+                        {
+                            "name": "rosterPeriod",
+                            "type": "RosterPeriod | null",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<string>",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nTake a roster period and based on the set start and end dates.\nGenerates a header for the calendar and returns it as an Observable<string>\n",
+                    "description": "<p>Take a roster period and based on the set start and end dates.\nGenerates a header for the calendar and returns it as an Observable<string></p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 1565,
+                                "end": 1577,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "rosterPeriod"
+                            },
+                            "type": "RosterPeriod | null",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 1559,
+                                "end": 1564,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>The roster period that is being used to generate a header</p>\n"
+                        },
+                        {
+                            "tagName": {
+                                "pos": 1642,
+                                "end": 1649,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "originalKeywordKind": 121,
+                                "escapedText": "private"
+                            },
+                            "comment": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "navigateBackward",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 40,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "navigateForward",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 36,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 32,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, Input, OnInit} from '@angular/core';\nimport {DateConstants} from \"../../core/constants/date.constants\";\nimport {Store} from \"@ngrx/store\";\nimport {RosterActions, RosterApiActions} from \"./state/roster.actions\";\nimport {\n  selectCurrentRosterPeriod,\n} from \"./state/roster.selectors\";\nimport {Observable, of, share, switchMap} from \"rxjs\";\nimport {RosterPeriod} from \"./interfaces/roster-period\";\n\n@Component({\n  selector: 'app-roster',\n  templateUrl: './roster.component.html',\n  styleUrls: ['./roster.component.css']\n})\nexport class RosterComponent implements OnInit{\n\n  @Input()\n  public isDashboard: boolean | undefined;\n\n  public selectCurrentRosterPeriod$: Observable<RosterPeriod | null>;\n  public currentPeriodHeader$: Observable<string | null>;\n\n\n  constructor(private _store: Store, public dateConstants: DateConstants) {\n    this.selectCurrentRosterPeriod$ = this._store.select(selectCurrentRosterPeriod);\n    this.currentPeriodHeader$ = this.selectCurrentRosterPeriod$.pipe(\n      switchMap((rosterPeriod: RosterPeriod | null) => this._getPeriodString(rosterPeriod))\n    );\n  }\n\n  ngOnInit(): void {\n    this._store.dispatch(RosterApiActions.loadRosterPeriod());\n  }\n\n  public navigateForward(): void {\n    this._store.dispatch(RosterActions.navigateForward());\n  }\n\n  public navigateBackward(): void {\n    this._store.dispatch(RosterActions.navigateBackward());\n  }\n\n  /**\n   * Take a roster period and based on the set start and end dates.\n   * Generates a header for the calendar and returns it as an Observable<string>\n   * @param rosterPeriod The roster period that is being used to generate a header\n   * @private\n   */\n  private _getPeriodString(rosterPeriod: RosterPeriod | null): Observable<string> {\n\n    // A roster period exists, so we are able to generate a representative header\n    if(rosterPeriod) {\n      const periodStart = rosterPeriod.periodStart, periodEnd = rosterPeriod.periodEnd;\n      const startDay = periodStart.getDate(), endDay = periodEnd.getDate();\n      const startMonth = periodStart.getMonth(), endMonth = periodEnd.getMonth();\n      const startYear = periodStart.getFullYear(), endYear = periodEnd.getFullYear();\n\n      // The periods fall in the same month of the same year.\n      // We need to check if the period is the entire month\n      if((startMonth === endMonth) && (startYear === endYear)) {\n        let daysForMonth = new Date(periodStart.getFullYear(), periodStart.getMonth() + 1, 0).getDate();\n        let month = periodStart.getMonth();\n        if(startDay === 1 && endDay === daysForMonth) return of(this.dateConstants.getMonth(month))\n      }\n    }\n\n    return of('header');\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".roster-toolbar-content {\r\n  width: 100%;\r\n  display: grid;\r\n  grid-template-columns: repeat(3, 1fr);\r\n}\r\n\r\n.roster-header-container {\r\n  display: flex;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n  gap: 5px;\r\n}\r\n\r\n.roster-navigation-container {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  gap: 5px;\r\n}\r\n\r\n.roster-tile-content {\r\n  width: 100%;\r\n}\r\n\r\n.roster-tile-header {\r\n  width: 100%;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n}\r\n",
+                    "styleUrl": "./roster.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "_store",
+                        "type": "Store",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "dateConstants",
+                        "type": "DateConstants",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 22,
+                "jsdoctags": [
+                    {
+                        "name": "_store",
+                        "type": "Store",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "dateConstants",
+                        "type": "DateConstants",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<mat-toolbar>\n  <div class=\"roster-toolbar-content\">\n    <div class=\"roster-header-container\">\n      <button [matMenuTriggerFor]=\"menu\" aria-label=\"Example icon-button with a menu\" mat-icon-button>\n        <mat-icon>more_vert</mat-icon>\n      </button>\n      <mat-menu #menu=\"matMenu\">\n        <button mat-menu-item>Clear Roster</button>\n        <button mat-menu-item>Fill from last month</button>\n        <button mat-menu-item>Fill from start watch</button>\n      </mat-menu>\n      <mat-label>671 Pump</mat-label>\n    </div>\n\n    <!--  Generate the Calendar navigation  -->\n    <ng-container *ngIf=\"(currentPeriodHeader$ | async) as periodHeader\">\n      <div class=\"roster-navigation-container\">\n        <button (click)=\"navigateBackward()\" mat-button>\n          <mat-icon>navigate_before</mat-icon>\n        </button>\n        <mat-label>{{periodHeader}}</mat-label>\n        <button (click)=\"navigateForward()\" mat-button>\n          <mat-icon>navigate_next</mat-icon>\n        </button>\n      </div>\n    </ng-container>\n\n  </div>\n</mat-toolbar>\n\n<mat-grid-list cols=\"7\" rowHeight=\"30px\">\n\n  <!-- Generate the Day headers for the calendar -->\n  <mat-grid-tile *ngFor=\"let header of dateConstants.getDayStrings()\" style=\"background: green\">\n    <mat-label>{{header}}</mat-label>\n  </mat-grid-tile>\n\n  <!-- Generate the day block when there is a Roster Period-->\n  <ng-container *ngIf=\"(selectCurrentRosterPeriod$ | async) as rosterPeriod\">\n    <mat-grid-tile\n      *ngFor=\"let rosterDay of rosterPeriod.rosterDays\"\n      colspan=\"1\"\n      rowspan=\"11\"\n    >\n      <mat-grid-tile-header>\n        <div class=\"roster-tile-header\">\n          <mat-label>{{rosterDay.date | date: 'mediumDate'}}</mat-label>\n          <button color=\"accent\" mat-button>\n            <mat-icon>edit</mat-icon>\n          </button>\n        </div>\n      </mat-grid-tile-header>\n      <div class=\"roster-tile-content\">\n        <mat-list>\n          <ng-container *ngFor=\"let slot of rosterDay.slots; let itemIndex=index;\">\n            <mat-list-item>\n              <mat-label>{{slot}}</mat-label>\n            </mat-list-item>\n            <mat-divider *ngIf=\"itemIndex !== (rosterDay.slots.length - 1)\"></mat-divider>\n          </ng-container>\n        </mat-list>\n      </div>\n    </mat-grid-tile>\n  </ng-container>\n</mat-grid-list>\n"
+        }
+    ],
+    "modules": [
+        {
+            "name": "AppModule",
+            "id": "module-AppModule-4235c45d632473d6f558bf43799edce1156588596f16e64cb16e92dcbdbc214ab16af3d9a9de48472ef3625c3858269c65260c6526efeb4fc43d6a098eb5834b",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/app.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\n\r\nimport { AppComponent } from './app.component';\r\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\r\nimport { StoreModule } from '@ngrx/store';\r\nimport { NavigationMenuComponent } from './navigation-menu/navigation-menu.component';\r\nimport { LayoutModule } from '@angular/cdk/layout';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatSidenavModule } from '@angular/material/sidenav';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatListModule } from '@angular/material/list';\r\nimport {RouterOutlet} from \"@angular/router\";\r\nimport { DashboardComponent } from './dashboard/dashboard.component';\r\nimport { MatGridListModule } from '@angular/material/grid-list';\r\nimport { MatCardModule } from '@angular/material/card';\r\nimport { MatMenuModule } from '@angular/material/menu';\r\nimport {RoutingConstants} from \"./core/constants/routing.constants\";\r\nimport { RosterComponent } from './features/roster/roster.component';\r\nimport { AppRoutingModule } from './app-routing.module';\r\nimport { DragDropModule } from '@angular/cdk/drag-drop';\r\nimport { RosterCardComponent } from './roster-card/roster-card.component';\r\nimport {MatInputModule} from \"@angular/material/input\";\r\nimport {InjectComponent} from \"./core/directives/inject-component.directive\";\r\nimport {CommonModule} from \"@angular/common\";\r\nimport {DateConstants} from \"./core/constants/date.constants\";\r\nimport {EffectsModule} from '@ngrx/effects';\r\nimport {RosterEffects} from \"./features/roster/state/roster.effects\";\r\nimport {rosterReducer} from \"./features/roster/state/roster.reducer\";\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    NavigationMenuComponent,\r\n    DashboardComponent,\r\n    RosterComponent,\r\n    RosterCardComponent,\r\n    InjectComponent,\r\n  ],\r\n  imports: [\r\n    CommonModule,\r\n    BrowserModule,\r\n    BrowserAnimationsModule,\r\n    LayoutModule,\r\n    MatToolbarModule,\r\n    MatButtonModule,\r\n    MatSidenavModule,\r\n    MatIconModule,\r\n    MatListModule,\r\n    RouterOutlet,\r\n    MatGridListModule,\r\n    MatCardModule,\r\n    MatMenuModule,\r\n    AppRoutingModule,\r\n    DragDropModule,\r\n    MatInputModule,\r\n    StoreModule.forRoot({\r\n      roster: rosterReducer\r\n    }),\r\n    EffectsModule.forRoot([\r\n      RosterEffects\r\n    ])\r\n  ],\r\n  providers: [\r\n    RoutingConstants,\r\n    DateConstants,\r\n  ],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": [
+                        {
+                            "name": "DateConstants"
+                        },
+                        {
+                            "name": "RoutingConstants"
+                        }
+                    ]
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        },
+                        {
+                            "name": "DashboardComponent"
+                        },
+                        {
+                            "name": "InjectComponent"
+                        },
+                        {
+                            "name": "NavigationMenuComponent"
+                        },
+                        {
+                            "name": "RosterCardComponent"
+                        },
+                        {
+                            "name": "RosterComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "AppRoutingModule"
+                        },
+                        {
+                            "name": "RouterOutlet"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "AppRoutingModule",
+            "id": "module-AppRoutingModule-1c27c5195b7da23b6113bf98f80526dd8f13e701be0e61fc9e990c14a3542af3fd77da08bd69a884241af78339670a805d8ef59bde0de867e13b32df08e83a4d",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/app-routing.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport {RouterModule, Routes} from \"@angular/router\";\nimport {RosterComponent} from \"./features/roster/roster.component\";\nimport {DashboardComponent} from \"./dashboard/dashboard.component\";\n\nconst routes: Routes = [\n  { path: 'dashboard', component: DashboardComponent },\n  { path: 'rosters', component: RosterComponent }\n];\n\n@NgModule({\n  imports: [\n    RouterModule.forRoot(routes),\n  ],\n  exports: [\n    RouterModule\n  ]\n})\nexport class AppRoutingModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.prod.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  production: true\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  production: false\n}"
+            },
+            {
+                "name": "initialState",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/features/roster/state/roster.reducer.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "RosterState",
+                "defaultValue": "{\r\n  currentStartDate: new Date(today.getFullYear(), today.getMonth(), 1),\r\n  currentEndDate: new Date(today.getFullYear(), today.getMonth() + 1, 0),\r\n  allRosterPeriods: [],\r\n  currentRosterPeriod: null,\r\n  intervalPeriod: IntervalPeriodsEnum.Month,\r\n  error: null,\r\n  status: StatusEnum.Pending,\r\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LoggedIn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LoggedIn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LoggedOut",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LoggedOut",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "metaReducers",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/reducers/index.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "MetaReducer[]",
+                "defaultValue": "environment.production\r\n  ? []\r\n  : [debug]"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "RosterActions",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/features/roster/state/roster.actions.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "createActionGroup({\r\n  source: 'Roster',\r\n  events: {\r\n    'Update Currently Selected Period': props<{rosterPeriod: RosterPeriod, periodStart: Date, periodEnd: Date}>(),\r\n    'Update Period Interval': props<{ newInterval: IntervalPeriodsEnum }>(),\r\n    'Navigate Forward': emptyProps(),\r\n    'Navigate Backward': emptyProps(),\r\n    'Navigate Error': props<{ error: string }>()\r\n  }\r\n})"
+            },
+            {
+                "name": "RosterApiActions",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/features/roster/state/roster.actions.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "createActionGroup({\r\n  source: 'Roster API',\r\n  events: {\r\n    'Load Roster Period': emptyProps(),\r\n    'Load Roster Period Success': props<{ rosterPeriod: RosterPeriod }>(),\r\n    'Load Roster Period Failure': props<{ error: string }>()\r\n  }\r\n})"
+            },
+            {
+                "name": "rosterReducer",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/features/roster/state/roster.reducer.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "createReducer(\r\n  initialState,\r\n  on(RosterApiActions.loadRosterPeriod, (state) => ({\r\n    ...state,\r\n    status: StatusEnum.Loading\r\n  })),\r\n  on(RosterApiActions.loadRosterPeriodSuccess, (state, { rosterPeriod }) => ({\r\n    ...state,\r\n    allRosterPeriods: [...state.allRosterPeriods, rosterPeriod],\r\n    error: null,\r\n    status: StatusEnum.Success\r\n  })),\r\n  on(RosterApiActions.loadRosterPeriodFailure, (state, { error }) => ({\r\n    ...state,\r\n    error: error,\r\n    status: StatusEnum.Error\r\n  })),\r\n  on(RosterActions.updatePeriodInterval, (state, { newInterval }) => ({\r\n    ...state,\r\n    intervalPeriod: newInterval,\r\n    status: StatusEnum.Pending\r\n  })),\r\n  on(RosterActions.navigateForward, (state) => ({\r\n    ...state,\r\n    status: StatusEnum.Loading\r\n  })),\r\n  on(RosterActions.navigateBackward, (state) => ({\r\n    ...state,\r\n    status: StatusEnum.Loading\r\n  })),\r\n  on(RosterActions.navigateError, (state, { error }) => ({\r\n    ...state,\r\n    error: error,\r\n    status: StatusEnum.Error\r\n  }))\r\n)"
+            },
+            {
+                "name": "Secondary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "selectCurrentEndDate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/features/roster/state/roster.selectors.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "createSelector(\r\n  selectRoster,\r\n  (roster: RosterState) => roster.currentEndDate\r\n)"
+            },
+            {
+                "name": "selectCurrentRosterPeriod",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/features/roster/state/roster.selectors.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "createSelector(\r\n  selectRoster,\r\n  (roster: RosterState) => roster.currentRosterPeriod\r\n)"
+            },
+            {
+                "name": "selectCurrentStartDate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/features/roster/state/roster.selectors.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "createSelector(\r\n  selectRoster,\r\n  (roster: RosterState) => roster.currentStartDate\r\n)"
+            },
+            {
+                "name": "selectIntervalPeriod",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/features/roster/state/roster.selectors.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "createSelector(\r\n  selectRoster,\r\n  (roster: RosterState) => roster.intervalPeriod\r\n)"
+            },
+            {
+                "name": "selectRoster",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/features/roster/state/roster.selectors.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "createFeatureSelector<RosterState>('roster')"
+            },
+            {
+                "name": "selectRosterPeriodFromDates",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/features/roster/state/roster.selectors.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(start: Date, end: Date) => createSelector(\r\n  selectRoster,\r\n  (roster: RosterState) => {\r\n    const period: RosterPeriod = {\r\n      periodStart: start,\r\n      periodEnd: end,\r\n      rosterDays: []\r\n    }\r\n\r\n    // Find loaded roster periods that may potentially have the roster days that fall within the required period.\r\n    // Search the roster day array of the found periods for roster days that fall within the required period\r\n    // Add all matching roster days found to the roster days array for the roster period that is being returned\r\n    roster.allRosterPeriods.filter(\r\n      (rosterPeriod: RosterPeriod) =>\r\n        (rosterPeriod.periodStart >= start || rosterPeriod.periodStart <= end) ||\r\n        (rosterPeriod.periodEnd >= start || rosterPeriod.periodEnd <= end)\r\n    ).forEach((foundPeriod: RosterPeriod) => {\r\n      let matchingDays = foundPeriod.rosterDays.find(\r\n        (rosterDay: RosterDay) => rosterDay.date >= start && rosterDay.date <= end\r\n      )\r\n\r\n      if(matchingDays !== undefined) period.rosterDays.push(matchingDays);\r\n    })\r\n\r\n    return period;\r\n  }\r\n)"
+            },
+            {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<Button>",
+                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<Header>",
+                "defaultValue": "(args: Header) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<Page>",
+                "defaultValue": "(args: Page) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "today",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/features/roster/state/roster.reducer.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "new Date()"
+            }
+        ],
+        "functions": [
+            {
+                "name": "debug",
+                "file": "src/app/reducers/index.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [
+                    {
+                        "name": "reducer",
+                        "type": "ActionReducer",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "returnType": "ActionReducer<any>",
+                "jsdoctags": [
+                    {
+                        "name": "reducer",
+                        "type": "ActionReducer",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        ],
+        "typealiases": [],
+        "enumerations": [
+            {
+                "name": "IntervalPeriodsEnum",
+                "childs": [
+                    {
+                        "name": "Month",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": 0
+                    },
+                    {
+                        "name": "Week",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": 1
+                    },
+                    {
+                        "name": "Days3",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": 2
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "src/app/features/roster/interval-periods.enum.ts"
+            },
+            {
+                "name": "StatusEnum",
+                "childs": [
+                    {
+                        "name": "Pending",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Pending"
+                    },
+                    {
+                        "name": "Loading",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Loading"
+                    },
+                    {
+                        "name": "Error",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Error"
+                    },
+                    {
+                        "name": "Success",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Success"
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "src/app/core/enums/status.enum.ts"
+            }
+        ],
+        "groupedVariables": {
+            "src/environments/environment.prod.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.prod.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  production: true\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  production: false\n}"
+                }
+            ],
+            "src/app/features/roster/state/roster.reducer.ts": [
+                {
+                    "name": "initialState",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/features/roster/state/roster.reducer.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "RosterState",
+                    "defaultValue": "{\r\n  currentStartDate: new Date(today.getFullYear(), today.getMonth(), 1),\r\n  currentEndDate: new Date(today.getFullYear(), today.getMonth() + 1, 0),\r\n  allRosterPeriods: [],\r\n  currentRosterPeriod: null,\r\n  intervalPeriod: IntervalPeriodsEnum.Month,\r\n  error: null,\r\n  status: StatusEnum.Pending,\r\n}"
+                },
+                {
+                    "name": "rosterReducer",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/features/roster/state/roster.reducer.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "createReducer(\r\n  initialState,\r\n  on(RosterApiActions.loadRosterPeriod, (state) => ({\r\n    ...state,\r\n    status: StatusEnum.Loading\r\n  })),\r\n  on(RosterApiActions.loadRosterPeriodSuccess, (state, { rosterPeriod }) => ({\r\n    ...state,\r\n    allRosterPeriods: [...state.allRosterPeriods, rosterPeriod],\r\n    error: null,\r\n    status: StatusEnum.Success\r\n  })),\r\n  on(RosterApiActions.loadRosterPeriodFailure, (state, { error }) => ({\r\n    ...state,\r\n    error: error,\r\n    status: StatusEnum.Error\r\n  })),\r\n  on(RosterActions.updatePeriodInterval, (state, { newInterval }) => ({\r\n    ...state,\r\n    intervalPeriod: newInterval,\r\n    status: StatusEnum.Pending\r\n  })),\r\n  on(RosterActions.navigateForward, (state) => ({\r\n    ...state,\r\n    status: StatusEnum.Loading\r\n  })),\r\n  on(RosterActions.navigateBackward, (state) => ({\r\n    ...state,\r\n    status: StatusEnum.Loading\r\n  })),\r\n  on(RosterActions.navigateError, (state, { error }) => ({\r\n    ...state,\r\n    error: error,\r\n    status: StatusEnum.Error\r\n  }))\r\n)"
+                },
+                {
+                    "name": "today",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/features/roster/state/roster.reducer.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "new Date()"
+                }
+            ],
+            "src/stories/Button.stories.ts": [
+                {
+                    "name": "Large",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Secondary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Small",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<Button>",
+                    "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+                }
+            ],
+            "src/stories/Header.stories.ts": [
+                {
+                    "name": "LoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "LoggedOut",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<Header>",
+                    "defaultValue": "(args: Header) => ({\n  props: args,\n})"
+                }
+            ],
+            "src/stories/Page.stories.ts": [
+                {
+                    "name": "LoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "LoggedOut",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<Page>",
+                    "defaultValue": "(args: Page) => ({\n  props: args,\n})"
+                }
+            ],
+            "src/app/reducers/index.ts": [
+                {
+                    "name": "metaReducers",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/reducers/index.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MetaReducer[]",
+                    "defaultValue": "environment.production\r\n  ? []\r\n  : [debug]"
+                }
+            ],
+            "src/app/features/roster/state/roster.actions.ts": [
+                {
+                    "name": "RosterActions",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/features/roster/state/roster.actions.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "createActionGroup({\r\n  source: 'Roster',\r\n  events: {\r\n    'Update Currently Selected Period': props<{rosterPeriod: RosterPeriod, periodStart: Date, periodEnd: Date}>(),\r\n    'Update Period Interval': props<{ newInterval: IntervalPeriodsEnum }>(),\r\n    'Navigate Forward': emptyProps(),\r\n    'Navigate Backward': emptyProps(),\r\n    'Navigate Error': props<{ error: string }>()\r\n  }\r\n})"
+                },
+                {
+                    "name": "RosterApiActions",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/features/roster/state/roster.actions.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "createActionGroup({\r\n  source: 'Roster API',\r\n  events: {\r\n    'Load Roster Period': emptyProps(),\r\n    'Load Roster Period Success': props<{ rosterPeriod: RosterPeriod }>(),\r\n    'Load Roster Period Failure': props<{ error: string }>()\r\n  }\r\n})"
+                }
+            ],
+            "src/app/features/roster/state/roster.selectors.ts": [
+                {
+                    "name": "selectCurrentEndDate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/features/roster/state/roster.selectors.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "createSelector(\r\n  selectRoster,\r\n  (roster: RosterState) => roster.currentEndDate\r\n)"
+                },
+                {
+                    "name": "selectCurrentRosterPeriod",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/features/roster/state/roster.selectors.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "createSelector(\r\n  selectRoster,\r\n  (roster: RosterState) => roster.currentRosterPeriod\r\n)"
+                },
+                {
+                    "name": "selectCurrentStartDate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/features/roster/state/roster.selectors.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "createSelector(\r\n  selectRoster,\r\n  (roster: RosterState) => roster.currentStartDate\r\n)"
+                },
+                {
+                    "name": "selectIntervalPeriod",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/features/roster/state/roster.selectors.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "createSelector(\r\n  selectRoster,\r\n  (roster: RosterState) => roster.intervalPeriod\r\n)"
+                },
+                {
+                    "name": "selectRoster",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/features/roster/state/roster.selectors.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "createFeatureSelector<RosterState>('roster')"
+                },
+                {
+                    "name": "selectRosterPeriodFromDates",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/features/roster/state/roster.selectors.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(start: Date, end: Date) => createSelector(\r\n  selectRoster,\r\n  (roster: RosterState) => {\r\n    const period: RosterPeriod = {\r\n      periodStart: start,\r\n      periodEnd: end,\r\n      rosterDays: []\r\n    }\r\n\r\n    // Find loaded roster periods that may potentially have the roster days that fall within the required period.\r\n    // Search the roster day array of the found periods for roster days that fall within the required period\r\n    // Add all matching roster days found to the roster days array for the roster period that is being returned\r\n    roster.allRosterPeriods.filter(\r\n      (rosterPeriod: RosterPeriod) =>\r\n        (rosterPeriod.periodStart >= start || rosterPeriod.periodStart <= end) ||\r\n        (rosterPeriod.periodEnd >= start || rosterPeriod.periodEnd <= end)\r\n    ).forEach((foundPeriod: RosterPeriod) => {\r\n      let matchingDays = foundPeriod.rosterDays.find(\r\n        (rosterDay: RosterDay) => rosterDay.date >= start && rosterDay.date <= end\r\n      )\r\n\r\n      if(matchingDays !== undefined) period.rosterDays.push(matchingDays);\r\n    })\r\n\r\n    return period;\r\n  }\r\n)"
+                }
+            ]
+        },
+        "groupedFunctions": {
+            "src/app/reducers/index.ts": [
+                {
+                    "name": "debug",
+                    "file": "src/app/reducers/index.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [
+                        {
+                            "name": "reducer",
+                            "type": "ActionReducer",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "returnType": "ActionReducer<any>",
+                    "jsdoctags": [
+                        {
+                            "name": "reducer",
+                            "type": "ActionReducer",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "groupedEnumerations": {
+            "src/app/features/roster/interval-periods.enum.ts": [
+                {
+                    "name": "IntervalPeriodsEnum",
+                    "childs": [
+                        {
+                            "name": "Month",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": 0
+                        },
+                        {
+                            "name": "Week",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": 1
+                        },
+                        {
+                            "name": "Days3",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": 2
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "src/app/features/roster/interval-periods.enum.ts"
+                }
+            ],
+            "src/app/core/enums/status.enum.ts": [
+                {
+                    "name": "StatusEnum",
+                    "childs": [
+                        {
+                            "name": "Pending",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Pending"
+                        },
+                        {
+                            "name": "Loading",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Loading"
+                        },
+                        {
+                            "name": "Error",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Error"
+                        },
+                        {
+                            "name": "Success",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Success"
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "src/app/core/enums/status.enum.ts"
+                }
+            ]
+        },
+        "groupedTypeAliases": {}
+    },
+    "routes": {
+        "name": "<root>",
+        "kind": "module",
+        "className": "AppModule",
+        "children": [
+            {
+                "name": "routes",
+                "filename": "src/app/app-routing.module.ts",
+                "module": "AppRoutingModule",
+                "children": [
+                    {
+                        "path": "dashboard",
+                        "component": "DashboardComponent"
+                    },
+                    {
+                        "path": "rosters",
+                        "component": "RosterComponent"
+                    }
+                ],
+                "kind": "module"
+            }
+        ]
+    },
+    "coverage": {
+        "count": 2,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.state.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "AppState",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/constants/date.constants.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "DateConstants",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/constants/routing.constants.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "RoutingConstants",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/directives/inject-component.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "InjectComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/interfaces/url.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "URL",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/dashboard/dashboard.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DashboardComponent",
+                "coveragePercent": 33,
+                "coverageCount": "1/3",
+                "status": "medium"
+            },
+            {
+                "filePath": "src/app/dashboard/dashboard.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DashBoardCard",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/interfaces/roster-day.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "RosterDay",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/interfaces/roster-period.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "RosterPeriod",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/interfaces/roster-state.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "RosterState",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/roster.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "RosterComponent",
+                "coveragePercent": 10,
+                "coverageCount": "1/10",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/services/roster.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "RosterService",
+                "coveragePercent": 9,
+                "coverageCount": "1/11",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/state/roster.actions.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "RosterActions",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/state/roster.actions.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "RosterApiActions",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/state/roster.effects.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "RosterEffects",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/state/roster.reducer.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "initialState",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/state/roster.reducer.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "rosterReducer",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/state/roster.reducer.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "today",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/state/roster.selectors.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "selectCurrentEndDate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/state/roster.selectors.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "selectCurrentRosterPeriod",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/state/roster.selectors.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "selectCurrentStartDate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/state/roster.selectors.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "selectIntervalPeriod",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/state/roster.selectors.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "selectRoster",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/features/roster/state/roster.selectors.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "selectRosterPeriodFromDates",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/navigation-menu/navigation-menu.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "NavigationMenuComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/reducers/index.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "debug",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/reducers/index.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "metaReducers",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/roster-card/roster-card.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "RosterCardComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.prod.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Large",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Secondary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Small",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedIn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedOut",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedIn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedOut",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/User.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "User",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ButtonComponent",
+                "coveragePercent": 83,
+                "coverageCount": "5/6",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/stories/header.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HeaderComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/page.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            }
+        ]
+    }
+}
